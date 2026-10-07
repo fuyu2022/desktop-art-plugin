@@ -1,0 +1,13 @@
+{
+  "$schema": "../../sdk/plugin.schema.json",
+  "manifestVersion": 1,
+  "id": "plugin-template",
+  "name": "插件模板",
+  "version": "1.0.0",
+  "author": "Desktop Art",
+  "dependencies": {"plugins": {}, "libraries": {"color-utils": {"version": "1.0.0", "entry": "vendor/color-utils.mjs"}}},
+  "entry": "src/main.js",
+  "updateUrl": null,
+  "sdkVersion": 2,
+  "surface": "foreground"
+}

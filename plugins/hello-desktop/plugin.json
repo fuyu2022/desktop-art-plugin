@@ -1,0 +1,13 @@
+{
+  "$schema": "../../sdk/plugin.schema.json",
+  "manifestVersion": 1,
+  "id": "hello-desktop",
+  "name": "桌面标记",
+  "version": "1.0.0",
+  "author": "Desktop Art",
+  "dependencies": {"plugins": {}, "libraries": {}},
+  "entry": "main.js",
+  "updateUrl": null,
+  "sdkVersion": 2,
+  "surface": "background"
+}

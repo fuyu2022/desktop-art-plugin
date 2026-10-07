@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Desktop Art plugin manifest v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["manifestVersion", "id", "name", "version", "author", "dependencies", "entry", "updateUrl", "sdkVersion", "surface"],
+  "properties": {
+    "$schema": {"type": "string", "maxLength": 2048},
+    "manifestVersion": {"const": 1},
+    "id": {"type": "string", "minLength": 1, "maxLength": 64, "pattern": "^[A-Za-z0-9_-]+$"},
+    "name": {"type": "string", "minLength": 1, "maxLength": 128, "pattern": "\\S"},
+    "version": {"$ref": "#/$defs/version"},
+    "author": {"type": "string", "minLength": 1, "maxLength": 128, "pattern": "\\S"},
+    "description": {"type": "string", "maxLength": 512},
+    "entry": {"$ref": "#/$defs/entry"},
+    "updateUrl": {"anyOf": [{"type": "null"}, {"type": "string", "maxLength": 2048, "format": "uri", "pattern": "^[Hh][Tt][Tt][Pp][Ss]://[^/@\\s]+(?:[/?#]|$)"}]},
+    "sdkVersion": {"const": 2},
+    "surface": {"enum": ["background", "foreground", "both"]},
+    "dependencies": {
+      "type": "object", "additionalProperties": false, "required": ["plugins", "libraries"],
+      "properties": {
+        "plugins": {"type": "object", "maxProperties": 64, "propertyNames": {"pattern": "^[A-Za-z0-9_-]{1,64}$"}, "additionalProperties": {"type": "string", "minLength": 1, "maxLength": 512}},
+        "libraries": {"type": "object", "maxProperties": 64, "propertyNames": {"maxLength": 128, "pattern": "^(?:@[A-Za-z0-9_-]+/)?[A-Za-z0-9_][A-Za-z0-9_.-]*$"}, "additionalProperties": {"type": "object", "additionalProperties": false, "required": ["version", "entry"], "properties": {"version": {"$ref": "#/$defs/version"}, "entry": {"$ref": "#/$defs/entry"}}}}
+      }
+    }
+  },
+  "$defs": {
+    "version": {"type": "string", "maxLength": 128, "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-(?:0|[1-9][0-9]*|[0-9A-Za-z-]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9A-Za-z-]*[A-Za-z-][0-9A-Za-z-]*))*)?(?:\\+[0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*)?$"},
+    "entry": {"type": "string", "minLength": 1, "maxLength": 240, "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.?(?:/|$))[^\\\\:%?#*<>|\"\\u0000-\\u001F]+\\.(?:js|mjs)$"}
+  }
+}

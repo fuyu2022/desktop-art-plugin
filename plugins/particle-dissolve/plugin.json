@@ -1,0 +1,13 @@
+{
+  "$schema": "../../sdk/plugin.schema.json",
+  "manifestVersion": 1,
+  "id": "particle-dissolve",
+  "name": "粒子消散",
+  "version": "1.0.1",
+  "author": "Desktop Art",
+  "dependencies": {"plugins": {}, "libraries": {}},
+  "entry": "main.js",
+  "updateUrl": null,
+  "sdkVersion": 2,
+  "surface": "foreground"
+}

@@ -1,0 +1,74 @@
+<!-- Adapted from the user-provided glass-emoji.html; no page background or ground reflection. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="105 222 884 589" role="img" aria-labelledby="title desc" data-glass-dome="reference-svg">
+<title id="title">玻璃半球笑脸</title><desc id="desc">透明半球，霓虹色边缘，大眼睛望向右上方，暖黄色内光和小小的微笑。</desc>
+<defs>
+ <radialGradient id="bg"><stop stop-color="#1c3058" /><stop offset=".58" stop-color="#101b35" /><stop offset="1" stop-color="#070a18" /></radialGradient>
+ <radialGradient id="halo"><stop stop-color="#185b9d" stop-opacity=".55" /><stop offset=".7" stop-color="#193784" stop-opacity=".22" /><stop offset="1" stop-color="#182960" stop-opacity="0" /></radialGradient>
+ <linearGradient id="glass" x1=".16" y1="0" x2=".78" y2="1" gradientUnits="objectBoundingBox"><stop stop-color="#568eaf" stop-opacity=".54" /><stop offset=".24" stop-color="#45699b" stop-opacity=".3" /><stop offset=".49" stop-color="#77738a" stop-opacity=".3" /><stop offset=".75" stop-color="#cfa785" stop-opacity=".28" /><stop offset="1" stop-color="#a7bcce" stop-opacity=".33" /></linearGradient>
+ <radialGradient id="warm" cx=".52" cy=".91" r=".65"><stop stop-color="#fffca0" /><stop offset=".23" stop-color="#ffd255" stop-opacity=".95" /><stop offset=".51" stop-color="#ffb950" stop-opacity=".48" /><stop offset="1" stop-color="#efa765" stop-opacity="0" /></radialGradient>
+ <linearGradient id="edge" x1="0" y1=".3" x2="1" y2=".65"><stop stop-color="#ffffc8" /><stop offset=".1" stop-color="#83feff" /><stop offset=".29" stop-color="#54f2ff" /><stop offset=".52" stop-color="#d1eaff" /><stop offset=".72" stop-color="#b28bff" /><stop offset=".88" stop-color="#ffb3fa" /><stop offset="1" stop-color="#74f9ff" /></linearGradient>
+ <linearGradient id="rim"><stop stop-color="#60cfff" /><stop offset=".17" stop-color="#d9abff" /><stop offset=".32" stop-color="#fff7b0" /><stop offset=".55" stop-color="#fff1a4" /><stop offset=".8" stop-color="#92eaff" /><stop offset="1" stop-color="#ffdb9c" /></linearGradient>
+ <linearGradient id="white" x1=".2" y1=".1" x2=".8" y2="1"><stop stop-color="#fffef5" /><stop offset=".38" stop-color="#fff5de" /><stop offset=".72" stop-color="#dedbea" /><stop offset="1" stop-color="#c5bdd7" /></linearGradient>
+ <linearGradient id="eyelid" x1="0" y1="0" x2=".6" y2="1"><stop stop-color="#ac91ae" /><stop offset=".2" stop-color="#2c2432" /><stop offset=".48" stop-color="#6c4528" /><stop offset=".75" stop-color="#d9a466" /><stop offset="1" stop-color="#fff0ac" /></linearGradient>
+ <linearGradient id="brow" x1="0" y1="0" x2=".3" y2="1"><stop stop-color="#b9b2d5" /><stop offset=".15" stop-color="#352c42" /><stop offset=".45" stop-color="#100e1b" /><stop offset=".8" stop-color="#211419" /><stop offset="1" stop-color="#885c27" /></linearGradient>
+ <linearGradient id="iris" x1=".1" y1="0" x2=".8" y2="1"><stop stop-color="#301845" /><stop offset=".18" stop-color="#1424b8" /><stop offset=".3" stop-color="#160d25" /><stop offset=".75" stop-color="#342027" /><stop offset=".88" stop-color="#9a6031" /><stop offset=".94" stop-color="#458e83" /><stop offset="1" stop-color="#22252b" /></linearGradient>
+ <linearGradient id="shine" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff" stop-opacity="0" /><stop offset=".46" stop-color="#fff" stop-opacity=".93" /><stop offset=".65" stop-color="#fff8e6" stop-opacity=".72" /><stop offset="1" stop-color="#fff" stop-opacity="0" /></linearGradient>
+ <radialGradient id="cheek"><stop stop-color="#fffbb0" stop-opacity=".95" /><stop offset=".38" stop-color="#ffd05d" stop-opacity=".8" /><stop offset="1" stop-color="#ffb34e" stop-opacity="0" /></radialGradient>
+ <filter id="blur"><feGaussianBlur stdDeviation="25" /></filter><filter id="soft"><feGaussianBlur stdDeviation="8" /></filter><filter id="glow"><feGaussianBlur stdDeviation="3" /></filter>
+ <path id="dome" d="M128 740 C97 662 153 462 300 336 C381 267 461 239 539 240 C690 234 845 329 925 491 C968 578 979 685 961 738 C946 789 160 808 128 740Z" />
+ <clipPath id="inside"><use href="#dome" /></clipPath>
+<clipPath id="eye-white-left"><path d="M369 659C346 599 409 503 478 502C542 496 588 551 597 610Q613 663 573 668L403 679Q379 681 369 659Z" /></clipPath><clipPath id="eye-white-right"><path d="M661 586C649 523 673 451 717 445C777 431 833 500 846 561Q858 601 832 607L710 630Q674 639 661 586Z" /></clipPath><radialGradient id="flow-0" data-flow-gradient="0"><stop offset="0" stop-color="#8ff6ff" stop-opacity=".8" /><stop offset=".5" stop-color="#8ff6ff" stop-opacity=".3" /><stop offset="1" stop-color="#8ff6ff" stop-opacity="0" /></radialGradient><radialGradient id="flow-1" data-flow-gradient="1"><stop offset="0" stop-color="#c6a1ff" stop-opacity=".8" /><stop offset=".5" stop-color="#c6a1ff" stop-opacity=".3" /><stop offset="1" stop-color="#c6a1ff" stop-opacity="0" /></radialGradient><radialGradient id="flow-2" data-flow-gradient="2"><stop offset="0" stop-color="#9e9fff" stop-opacity=".8" /><stop offset=".5" stop-color="#9e9fff" stop-opacity=".3" /><stop offset="1" stop-color="#9e9fff" stop-opacity="0" /></radialGradient></defs>
+<use href="#dome" fill="url(#glass)" />
+<g clip-path="url(#inside)">
+ <ellipse cx="550" cy="637" rx="405" ry="390" fill="url(#warm)" />
+ <path d="M144 727C110 502 315 253 536 258C747 253 967 449 947 730" fill="none" stroke="url(#edge)" stroke-width="36" opacity=".65" filter="url(#soft)" />
+ <path d="M166 713C145 561 246 374 395 294C454 266 514 261 572 266" fill="none" stroke="#80e8ff" stroke-width="17" opacity=".51" />
+ <path d="M204 733C184 651 221 502 294 410" fill="none" stroke="#8572ff" stroke-width="25" opacity=".65" filter="url(#glow)" />
+ <path d="M226 567Q237 507 269 456L287 462Q256 513 248 553Z" fill="#d8b6ff" opacity=".85" />
+ <path d="M280 427Q380 295 494 283L552 282Q420 324 328 440Z" fill="#a9caff" opacity=".33" />
+ <path d="M338 355Q431 277 549 284Q462 316 406 371Z" fill="url(#shine)" />
+ <path d="M598 282Q652 283 709 318Q652 312 614 294Z" fill="#ffc57e" opacity=".9" filter="url(#glow)" />
+ <path d="M856 421Q943 536 943 672Q923 558 869 474Z" fill="#c4edff" opacity=".85" filter="url(#glow)" />
+ <path d="M868 434Q928 509 943 583" fill="none" stroke="#fff9ff" stroke-width="10" filter="url(#soft)" />
+ <path d="M142 739Q120 684 154 583Q147 680 173 738M919 741Q934 675 908 609Q954 687 947 739" stroke="#fff2a1" stroke-width="17" fill="none" filter="url(#soft)" />
+ <ellipse cx="521" cy="745" rx="300" ry="39" fill="#ffe584" opacity=".57" filter="url(#soft)" />
+ 
+ <g data-part="flow-lighting"><ellipse data-flow-light="0" cx="210" cy="520" rx="110" ry="220" fill="url(#flow-0)" opacity=".24" /><ellipse data-flow-light="1" cx="887" cy="510" rx="110" ry="210" fill="url(#flow-1)" opacity=".24" /><ellipse data-flow-light="2" cx="630" cy="300" rx="180" ry="90" fill="url(#flow-2)" opacity=".24" /></g><g data-part="face"><path d="M364 496C388 443 437 407 482 399C497 396 504 415 488 422C434 433 397 463 370 502C366 507 360 504 364 496Z" fill="url(#brow)" stroke="#ceab8b" stroke-width="1.7" data-part="brow-left" />
+ <path d="M671 365C692 335 744 334 779 373C787 383 781 386 772 379C739 361 709 358 682 384C673 392 666 377 671 365Z" fill="url(#brow)" stroke="#b7a0d1" stroke-width="1.5" data-part="brow-right" />
+ 
+ <path data-part="socket-left" d="M360 659C331 587 405 486 479 490C548 488 594 548 601 612C608 676 567 676 512 678L402 684Q371 683 360 659Z" fill="#ffdf7f" stroke="#ffd66e" stroke-width="16" filter="url(#soft)" />
+ <path data-part="socket-right" d="M656 587C642 519 669 437 719 433C789 424 847 501 851 568Q855 605 828 611L711 636Q670 642 656 587Z" fill="#ffdf7f" stroke="#ffd66e" stroke-width="16" filter="url(#soft)" />
+ <g class="eye" data-part="eye-left">
+ <path d="M363 661C335 599 398 489 474 486C552 480 601 552 604 626Q608 668 576 673L401 685Q372 683 363 661Z" fill="url(#eyelid)" />
+ <path d="M369 659C346 599 409 503 478 502C542 496 588 551 597 610Q613 663 573 668L403 679Q379 681 369 659Z" fill="url(#white)" />
+ <path d="M391 586Q397 566 411 555" stroke="#fffff3" stroke-width="11" opacity=".9" fill="none" filter="url(#glow)" />
+ <g clip-path="url(#eye-white-left)"><g data-part="gaze-left"><ellipse cx="552" cy="596" rx="44" ry="69" transform="rotate(-13 552 596)" fill="url(#iris)" />
+ <ellipse cx="563" cy="603" rx="29" ry="48" transform="rotate(-13 563 603)" fill="#100c15" />
+ <ellipse cx="576" cy="562" rx="7" ry="13" transform="rotate(-31 576 562)" fill="#fffff0" />
+ </g></g></g>
+ <g class="eye" data-part="eye-right">
+ <path d="M655 591C641 522 664 439 712 428C781 411 845 494 853 564Q860 606 835 614L711 638Q667 644 655 591Z" fill="url(#eyelid)" />
+ <path d="M661 586C649 523 673 451 717 445C777 431 833 500 846 561Q858 601 832 607L710 630Q674 639 661 586Z" fill="url(#white)" />
+ <path d="M666 519Q668 494 681 478" fill="none" stroke="#fffedc" stroke-width="9" filter="url(#glow)" />
+ <g clip-path="url(#eye-white-right)"><g data-part="gaze-right"><ellipse cx="807" cy="542" rx="37" ry="67" transform="rotate(-13 807 542)" fill="url(#iris)" />
+ <ellipse cx="815" cy="541" rx="26" ry="45" transform="rotate(-13 815 541)" fill="#100c19" />
+ <ellipse cx="822" cy="511" rx="6.5" ry="13" transform="rotate(-29 822 511)" fill="#fffef1" />
+ </g></g></g>
+ 
+ <ellipse cx="442" cy="700" rx="118" ry="34" fill="url(#cheek)" transform="rotate(-4 442 700)" data-part="cheek" />
+ <ellipse cx="779" cy="639" rx="101" ry="38" fill="url(#cheek)" transform="rotate(-13 779 639)" data-part="cheek" />
+ <path data-part="cheek-shine-left" d="M366 697Q380 684 398 689Q385 699 366 700" fill="#fffbbd" filter="url(#glow)" />
+ <path data-part="cheek-shine-right" d="M746 628Q762 617 783 619Q765 629 746 630M837 619Q850 617 858 629" fill="#fffbbd" filter="url(#glow)" />
+ <g data-part="mouth-pose"><path data-part="mouth-shine" d="M601 681 Q650 698 683 658" fill="none" stroke="#fff3bc" stroke-width="6" stroke-linecap="round" opacity=".65" transform="translate(0 3)" /><path data-part="mouth" d="M601 681 Q650 698 683 658" fill="none" stroke="#341812" stroke-width="6" stroke-linecap="round" /></g></g></g>
+
+<use href="#dome" fill="none" stroke="url(#edge)" stroke-width="10" opacity=".65" filter="url(#glow)" />
+<use href="#dome" fill="none" stroke="url(#edge)" stroke-width="3.5" />
+<path d="M127 686C129 506 290 286 481 246C675 205 866 358 938 535" fill="none" stroke="#eeffff" stroke-width="3" opacity=".86" />
+<path d="M145 647C158 487 305 292 480 260Q588 234 701 293" fill="none" stroke="#69f8ff" stroke-width="5" opacity=".75" />
+<!-- Only the front/lower lip is visible; the upper half of the base ring is omitted. -->
+<path d="M129 754A417 39 0 0 0 963 754" fill="none" stroke="url(#rim)" stroke-width="9" filter="url(#glow)" />
+<path d="M129 754A417 36 0 0 0 963 754" fill="none" stroke="url(#rim)" stroke-width="4" />
+<path d="M162 752A384 27 0 0 0 930 752" fill="none" stroke="url(#rim)" stroke-width="5" opacity=".8" />
+<path d="M162 754C225 801 834 803 934 754" fill="none" stroke="#fffbd1" stroke-width="4" />
+<path d="M250 773Q534 807 835 775" fill="none" stroke="#ffd172" stroke-width="5" opacity=".8" filter="url(#glow)" />
+</svg>

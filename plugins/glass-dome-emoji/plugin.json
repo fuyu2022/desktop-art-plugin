@@ -1,0 +1,14 @@
+{
+  "$schema": "../../sdk/plugin.schema.json",
+  "manifestVersion": 1,
+  "id": "glass-dome-emoji",
+  "name": "透明玻璃半球 Emoji",
+  "version": "1.7.0",
+  "author": "Desktop Art",
+  "description": "根据 glass-emoji.html 的 SVG 五官、眼眶和玻璃光影制作，带自然微表情和柔和流彩。",
+  "dependencies": {"plugins": {}, "libraries": {}},
+  "entry": "main.js",
+  "updateUrl": null,
+  "sdkVersion": 2,
+  "surface": "background"
+}
