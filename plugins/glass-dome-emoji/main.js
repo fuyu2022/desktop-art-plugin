@@ -45,7 +45,7 @@ export async function activate(api) {
   const originalColors=[edgeStops,rimStops].map(stops=>stops.map(node=>hexRgb(node.getAttribute('stop-color'))));
   const flowNodes=[...svg.querySelectorAll('[data-flow-light]')];
   const flowStops=flowNodes.map((_,i)=>[...svg.querySelector(`[data-flow-gradient="${i}"]`).children]);
-  const defaults={centerX:.5,bottomGap:0,maxRadius:280,scale:1,fps:30};
+  const defaults={centerX:.5,bottomGap:0,maxRadius:280,scale:1,fps:30,cursorReach:200};
   let settings=api.settings.get(defaults),W=0,H=0,left=0,top=0,renderScale=1,geometry='';
   const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
   const bounded=(n,fallback,a,b)=>Number.isFinite(n)?clamp(n,a,b):fallback;
@@ -64,6 +64,16 @@ export async function activate(api) {
     top=Math.max(rect.y+2,bottom-gap-(798-222)*renderScale);
     svg.style.left=`${left}px`;svg.style.top=`${top}px`;svg.style.width=`${finalWidth}px`;svg.style.height=`${height}px`;
     svg.style.display=W&&H?'block':'none';
+    if(api.capabilities?.customCursor && api.cursor){
+      const reach=bounded(settings.cursorReach,200,0,600);
+      const update=finalWidth&&W&&H?api.cursor.setRegion({asset:'lollipop.cur',shape:'dome',padding:reach,rect:{
+        x:left+21*renderScale,y:top+18*renderScale,
+        width:840*renderScale,height:558*renderScale,
+      }}):api.cursor.clear();
+      // Older hosts keep the existing expression animation. Cursor failures
+      // must not unload the face or take ownership of desktop mouse input.
+      void update.catch(error=>{if(!stopped)console.warn('Glass emoji cursor:',error);});
+    }
     if(W!==previousW||H!==previousH){lastTime=undefined;lastPaint=undefined;}
   }
   api.scene.subscribe(state=>{

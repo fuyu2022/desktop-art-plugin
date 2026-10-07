@@ -5,7 +5,7 @@
   "name": "透明玻璃半球 Emoji",
   "version": "1.0.0",
   "author": "fuyu2022",
-  "description": "根据 glass-emoji.html 的 SVG 五官、眼眶和玻璃光影制作，带自然微表情和柔和流彩。",
+  "description": "透明玻璃半球，带自然微表情、柔和流彩，以及靠近时切换的棒棒糖指针（需要 SDK 2.3.0）。",
   "dependencies": {"plugins": {}, "libraries": {}},
   "entry": "main.js",
   "updateUrl": "https://raw.githubusercontent.com/fuyu2022/desktop-art-plugin/main/updates/glass-dome-emoji.json",

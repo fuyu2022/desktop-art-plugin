@@ -1,6 +1,6 @@
-# Desktop Art Plugins
-
-Desktop Art 的独立 JS 视觉插件仓库，配置遵循插件规范 v1，使用公开 SDK 2.2.0。工具源码由 `desktop-art` 仓库单独维护。
+# Desktop-Art Plugins
+本项目依赖桌面管理工具 [[Desktop-Art https://github.com/fuyu2022/desktop-art](https://github.com/fuyu2022/desktop-art)
+Desktop-Art 的独立 JS 视觉插件仓库，配置遵循插件规范 v1，使用公开 SDK 2.2.0。工具源码由 `desktop-art` 仓库单独维护。
 
 ## 插件
 
@@ -13,13 +13,15 @@ Desktop Art 的独立 JS 视觉插件仓库，配置遵循插件规范 v1，使�
 
 ## 安装
 
-在 Desktop Art 托盘菜单选择“JS 画布 → 打开插件目录”。将 `plugins/<id>` 整个文件夹复制到该目录，保留文件夹名，再在“插件管理…”中加载。实际安装路径可能受启动器重定向，以菜单打开的位置为准。
+在 Desktop-Art 托盘菜单选择“JS 画布 → 打开插件目录”。将 `plugins/<id>` 整个文件夹复制到该目录，保留文件夹名，再在“插件管理…”中加载。实际安装路径可能受启动器重定向，以菜单打开的位置为准。
+
+新版插件管理页支持粘贴 GitHub Release 页面链接或 ZIP 附件链接，点击“下载并安装”即可下载、校验、解压并加载，临时 ZIP 随后删除。替换已安装插件会提示确认并保留旧版本备份；原先停用的插件保持停用。
 
 插件发布包不需要 Node.js。所有模块、CSS、SVG 和库文件都在各自插件目录内。`sdk/` 是编辑器参考文件，不需要复制到安装目录；安装后的 schema 由工具的 `canvas/host/plugin.schema.json` 提供，可调整 manifest 中的 `$schema` 编辑器路径。
 
 ## 检查更新与手动发布
 
-每个插件的 `plugin.json.updateUrl` 指向 `updates/<id>.json` 的固定 GitHub Raw 地址。支持检查更新的 Desktop Art 管理器会读取清单中的 `version` 和 `downloadUrl`，与本地版本比较并显示 Release 包地址。发布包是 `<id>-<version>.zip`，压缩包内保留 `<id>/plugin.json` 和完整插件目录。
+每个插件的 `plugin.json.updateUrl` 指向 `updates/<id>.json` 的固定 GitHub Raw 地址。支持检查更新的 Desktop-Art 管理器会读取清单中的 `version` 和 `downloadUrl`，与本地版本比较并显示 Release 包地址。发布包是 `<id>-<version>.zip`，压缩包内保留 `<id>/plugin.json` 和完整插件目录。
 
 首次发布的四个插件均为 `1.0.0`，本地已准备的 ZIP 在 `dist/plugin-updates/`，此目录不会提交到源码仓库。按下面的 Tag 创建四个 GitHub Release，并上传对应 ZIP，文件名必须与清单一致：
 
@@ -34,7 +36,7 @@ Desktop Art 的独立 JS 视觉插件仓库，配置遵循插件规范 v1，使�
 
 以后更新某个插件时，先修改它的 `plugin.json.version`，打包完整目录，创建 `<id>-v<version>` Release 并上传 `<id>-<version>.zip`；确认附件可下载后，再更新同一个 `updates/<id>.json` 的版本、下载链接、Release 页面和 ZIP 的 SHA256，并推送到 `main`。`updateUrl` 保持不变。SHA256 使用 `Get-FileHash -Algorithm SHA256` 计算，必须对应上传的同一份 ZIP。
 
-清单格式见 [插件更新 Schema](sdk/plugin-update.schema.json)。自建更新服务需要允许跨域读取 JSON（例如 `Access-Control-Allow-Origin: *`）；GitHub Raw 可直接用于清单。当前检查更新只获取元数据，安装仍由用户解压完成。
+清单格式见 [插件更新 Schema](sdk/plugin-update.schema.json)。自建更新服务需要允许跨域读取 JSON（例如 `Access-Control-Allow-Origin: *`）；GitHub Raw 可直接用于清单。检查更新只获取元数据，用户点击“下载并安装”后执行安装。
 
 ## 开发规范
 

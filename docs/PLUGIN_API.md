@@ -1,6 +1,6 @@
 # Desktop Art 插件接口参考
 
-当前 SDK 为 **2.2.0**，manifest 中声明 `sdkVersion: 2`。入口收到的 `api` 是本插件、本绘制层的 SDK 实例；类型声明见 [sdk.d.ts](../sdk/sdk.d.ts)，配置规范见 [PLUGIN_SPEC.md](PLUGIN_SPEC.md)，绘制接管详解见 [VISUAL_PLUGIN_SDK.md](VISUAL_PLUGIN_SDK.md)。本文列出当前实现的全部公开插件接口。
+当前 SDK 为 **2.3.0**，manifest 中声明 `sdkVersion: 2`。入口收到的 `api` 是本插件、本绘制层的 SDK 实例；类型声明见 [sdk.d.ts](../assets/canvas/host/sdk.d.ts)，配置规范见 [PLUGIN_SPEC.md](PLUGIN_SPEC.md)，绘制接管详解见 [VISUAL_PLUGIN_SDK.md](VISUAL_PLUGIN_SDK.md)。本文列出当前实现的全部公开插件接口。
 
 插件运行于浏览器 ES module 环境，可调用 DOM、Canvas 2D、WebGL2、Web Animations、Worker 等可用 Web API；这些原生 Web API 不属于 Desktop Art SDK。插件共享各自 surface 的页面与来源，当前没有进程级／来源级插件隔离。SDK不提供文件增删、Shell COM、移动图标、命令／菜单注册、系统快捷键、通知或任务调度接口；README 中这些能力属于未来规划。
 
@@ -8,12 +8,12 @@
 
 | 属性 | 类型 | 含义 |
 | --- | --- | --- |
-| `api.version` | `string` | 当前 SDK 版本 `2.2.0` |
+| `api.version` | `string` | 当前 SDK 版本 `2.3.0` |
 | `api.pluginId` | `string` | 插件目录 ID |
 | `api.surface` | `'background' \| 'foreground'` | 当前实例所在绘制层 |
 | `api.manifest` | 只读 `PluginDescriptor` | 宿主规范化的配置；兼容插件 `manifestVersion: 0`，版本／作者可能为空 |
 | `api.state` | 只读 `Scene` | 最新场景，等同 `api.scene.snapshot()` |
-| `api.capabilities` | 只读对象 | `canvas2d`、`webgl2`、`visualReplacement`、`sceneTexture`、`nativeInput` |
+| `api.capabilities` | 只读对象 | `canvas2d`、`webgl2`、`visualReplacement`、`sceneTexture`、`customCursor`、`nativeInput` |
 
 `visualReplacement` 仅前景为真；`nativeInput` 始终为 `false`。`webgl2: true` 表示提供该后端接口，不保证此机器／当前上下文创建成功；失败时使用 Canvas 2D。调试控制台的 `window.desktopArt` 没有插件配置，`manifest` 为 `null`，普通插件应只使用入口传入的 `api`。
 
@@ -142,6 +142,19 @@ try {
 
 返回 `Promise<{bitmap:ImageBitmap,url:string,padding:number}>`，为请求时普通盒子显示面的快照，不支持盒外桌面 ID `0`。玻璃模式包括原生外扩阴影，`padding` 指示外扩像素。它不包含壁纸、其他应用或独立的越界悬停层；不会自动成为实时纹理。
 
+## cursor：区域光标（2.3.0）
+
+`customCursor` 仅背景层为真。`api.cursor.setRegion({asset,rect,shape='ellipse',padding=0})` 返回 `Promise<void>`，为当前插件注册一个原生鼠标光标区域；再次调用替换当前区域。`asset` 是插件目录内的本地 `.cur` 相对路径，最大 1 MiB；不支持绝对路径、网络 URL 或跳出插件目录的路径。`rect` 使用画布物理像素，允许负坐标。`shape` 可为 `rect`、`ellipse` 或 `dome`；`dome` 是区域内以底边中点为中心的上半椭圆。`padding` 为轮廓周围的等距扩展距离，物理像素 0～4096，包含底边和斜边。
+
+```js
+if (api.capabilities.customCursor) {
+  await api.cursor.setRegion({asset:'lollipop.cur',shape:'dome',
+    rect:{x:680,y:680,width:560,height:360}});
+}
+```
+
+只改变宿主管理的桌面内容窗口的光标外观，Windows `.cur` 热点继续用于原生点击；不会替换全局系统光标方案。盒子标题、边缘缩放、拖放、编辑、捕获输入、菜单和其他应用保留原有指针。多个插件区域重叠时按插件 ID 排序取第一个。`api.cursor.clear()` 返回 `Promise<void>`，主动移除区域；卸载、热重载、画布关闭或 15 秒失联自动释放，SDK 每 4 秒续租。原生输入能力仍为 `false`。普通浏览器预览应自行模拟该接口，CSS 光标不代表桌面原生光标已经改变。
+
 ## events：事件订阅
 
 `api.events.on(type, listener)` 返回取消订阅函数。事件对象只读；不能取消原生事件，也不能用事件回调替换 Shell 点击、选择、右键或拖放。
@@ -201,4 +214,3 @@ try {
 SDK 的异步接口通过 Promise 拒绝错误；直接检查调用也可能同步抛错。管理界面显示配置／依赖／激活失败；开发者工具提供详细 JS 错误。当前宿主同一页面内的插件没有 CPU 时间隔离，耗时绘制需要作者控制。
 
 `window.desktopArtHost` 是开发者工具辅助对象，不是插件间调用接口：`version`、`surface`、`pluginIds`、`states` 为查询；`unload(id)` 只卸载当前页面的实例，不保存停用状态，之后可能由原生注册表重新加载；`load(id)`、`reload(id)` 请求原生插件管理动作。持久加载／卸载／删除使用管理界面，插件间使用 `api.dependencies`。
-

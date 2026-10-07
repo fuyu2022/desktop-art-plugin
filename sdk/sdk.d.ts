@@ -1,4 +1,4 @@
-/** Desktop Art browser SDK 2.2.0. plugin.json schema version is independent. */
+/** Desktop Art browser SDK 2.3.0. plugin.json schema version is independent. */
 export type Surface = 'background' | 'foreground';
 export type PluginSurface = Surface | 'both';
 export type DeepReadonly<T> = T extends (...args:any[])=>any ? T : T extends object ? {readonly [K in keyof T]:DeepReadonly<T[K]>} : T;
@@ -60,7 +60,7 @@ export interface PluginAPI {
   readonly version:string; readonly pluginId:string; readonly surface:Surface;
   readonly manifest:DeepReadonly<PluginDescriptor>|null;
   readonly state:DeepReadonly<Scene>;
-  readonly capabilities:Readonly<{canvas2d:boolean;webgl2:boolean;visualReplacement:boolean;sceneTexture:boolean;nativeInput:false}>;
+  readonly capabilities:Readonly<{canvas2d:boolean;webgl2:boolean;visualReplacement:boolean;sceneTexture:boolean;customCursor:boolean;nativeInput:false}>;
   dependencies:{getPlugin<T extends object=Record<string,unknown>>(id:string):Readonly<T>;importLibrary<T extends object=Record<string,unknown>>(name:string):Promise<T>};
   onState(listener:(state:DeepReadonly<Scene>)=>void):()=>void;
   createLayer(name:string):HTMLDivElement;
@@ -73,12 +73,14 @@ export interface PluginAPI {
     createLayer(options:LayerOptions):Layer;acquire(target:string,options?:{parts?:'image'|'label'|'icon'|'box'}):Promise<Lease>;
     getSceneTexture(boxId:number):Promise<{url:string;padding:number;bitmap:ImageBitmap}>};
   events:{on<K extends keyof PluginEventMap>(type:K,listener:(event:DeepReadonly<PluginEventMap[K]>)=>void):()=>void};
+  /** Background surface only; one region per plugin, canvas physical pixels. Local .cur asset; released on disposal. */
+  cursor:{setRegion(options:{asset:string;rect:Rect;shape?:'ellipse'|'rect'|'dome';padding?:number}):Promise<void>;clear():Promise<void>};
   animation:{start(options:AnimationOptions):Animation};
   settings:{get<T extends object>(defaults?:T):T;set(value:object):void};
   lifecycle:{onDispose(cleanup:()=>void|Promise<void>):()=>void|Promise<void>};
   dispose():Promise<void>;
 }
-export const SDK_VERSION:'2.2.0';
+export const SDK_VERSION:'2.3.0';
 export interface PluginModule {activate(api:PluginAPI):void|(()=>void)|Promise<void|(()=>void)>;dispose?():void|Promise<void>}
 export interface PluginHostDebug {
   readonly version:string;readonly surface:Surface;readonly pluginIds:string[];

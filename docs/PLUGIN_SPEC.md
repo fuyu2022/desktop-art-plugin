@@ -1,6 +1,6 @@
 # Desktop Art 插件规范 v1
 
-本规范描述当前已实现的浏览器 JS 插件。一个合格插件必须包含 UTF-8 的 `plugin.json`、配置指定的 ES module 入口，以及所有本地依赖文件。当前接口是视觉插件 SDK 2.2.0；配置格式版本 `manifestVersion: 1` 与 SDK 主版本 `sdkVersion: 2` 分开维护。
+本规范描述当前已实现的浏览器 JS 插件。一个合格插件必须包含 UTF-8 的 `plugin.json`、配置指定的 ES module 入口，以及所有本地依赖文件。当前接口是视觉插件 SDK 2.3.0；配置格式版本 `manifestVersion: 1` 与 SDK 主版本 `sdkVersion: 2` 分开维护。
 
 ## 目录与完整配置
 
@@ -51,7 +51,7 @@ my-effect/
 }
 ```
 
-`id` 必须与本地插件一致，`version` 是最新版本号，`downloadUrl` 是最新 Release 包的 HTTPS 地址。`releaseUrl`、`sha256` 和 `notes` 可选。宿主插件管理器的“检查更新”会读取并校验清单，显示最新版本和包地址；它不会因为检查更新而自动替换本地文件。
+`id` 必须与本地插件一致，`version` 是最新版本号，`downloadUrl` 是最新 Release 包的 HTTPS 地址。`releaseUrl`、`sha256` 和 `notes` 可选。宿主插件管理器的“检查更新”会读取并校验清单，显示最新版本和包地址；点击“下载并安装”后才开始安装。
 
 清单最多 64 KiB，请求超时为 10 秒。自建服务需允许管理页面跨域读取，例如返回 `Access-Control-Allow-Origin: *`。GitHub Raw 地址可直接使用。
 
@@ -146,7 +146,11 @@ export function dispose() {
 
 ## 更新地址与兼容
 
-`updateUrl` 是插件维护信息和远程更新清单地址。插件管理器会在用户主动点击“检查更新”时访问它，比较远程 `version` 与本地 SemVer，并显示 `downloadUrl`；不会后台自动访问，也不会自动下载、覆盖安装或执行远程代码。更新清单协议由 `updateManifestVersion` 单独版本化。
+`updateUrl` 是插件维护信息和远程更新清单地址。插件管理器会在用户主动点击“检查更新”时访问它，比较远程 `version` 与本地 SemVer，并显示 `downloadUrl`。更新清单协议由 `updateManifestVersion` 单独版本化。
+
+管理页的“下载插件”接受 HTTPS ZIP 直链或 GitHub `/releases/tag/<tag>`、`/releases/latest` 页面链接。Release 页面须包含唯一的 ZIP 附件；多个 ZIP 时提供具体附件链接。下载和解压在后台执行，ZIP 上限 64 MiB、解压后上限 256 MiB，最多 4096 个归档项。ZIP 支持单个 `<id>/` 目录或直接以 `plugin.json` 为根的完整插件包，不能包含路径越界、目录联接、符号链接或重复路径。
+
+安装前检查配置、入口和本地库；来自更新清单的安装还会核对 ID、版本和可选 SHA256。ZIP 在校验完成后删除，失败或取消也清理临时文件。首次安装自动加载；替换已有插件前提示确认，并将旧目录保存在 `canvas/install-backups/`，原有启用／停用状态保持不变。依赖缺失或激活异常时会在插件卡片显示错误。
 
 没有 `manifestVersion` 的旧配置，以及只有 `main.js` 的旧插件，仍按兼容模式运行，默认入口 `main.js`，默认背景层。它们在查询中标记 `legacy: true`，不认定为符合本规范；不猜测作者和版本，也不改写用户文件。升级时补齐完整 `plugin.json`，保留文件夹 ID 与原有 `surface`，即可继续使用现有启用状态和 SDK 设置。
 
