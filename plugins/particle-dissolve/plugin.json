@@ -3,11 +3,11 @@
   "manifestVersion": 1,
   "id": "particle-dissolve",
   "name": "粒子消散",
-  "version": "1.0.1",
-  "author": "Desktop Art",
+  "version": "1.0.0",
+  "author": "fuyu2022",
   "dependencies": {"plugins": {}, "libraries": {}},
   "entry": "main.js",
-  "updateUrl": null,
+  "updateUrl": "https://raw.githubusercontent.com/fuyu2022/desktop-art-plugin/main/updates/particle-dissolve.json",
   "sdkVersion": 2,
   "surface": "foreground"
 }

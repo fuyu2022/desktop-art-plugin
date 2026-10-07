@@ -1,0 +1,9 @@
+{
+  "updateManifestVersion": 1,
+  "id": "glass-dome-emoji",
+  "version": "1.0.0",
+  "downloadUrl": "https://github.com/fuyu2022/desktop-art-plugin/releases/download/glass-dome-emoji-v1.0.0/glass-dome-emoji-1.0.0.zip",
+  "releaseUrl": "https://github.com/fuyu2022/desktop-art-plugin/releases/tag/glass-dome-emoji-v1.0.0",
+  "sha256": "758c47ae19a4c8db42d17d9d4b81fc6a978e6b3f1d9b8e86a75e67ff1bf14b7b",
+  "notes": "首次发布。"
+}

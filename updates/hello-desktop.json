@@ -1,0 +1,9 @@
+{
+  "updateManifestVersion": 1,
+  "id": "hello-desktop",
+  "version": "1.0.0",
+  "downloadUrl": "https://github.com/fuyu2022/desktop-art-plugin/releases/download/hello-desktop-v1.0.0/hello-desktop-1.0.0.zip",
+  "releaseUrl": "https://github.com/fuyu2022/desktop-art-plugin/releases/tag/hello-desktop-v1.0.0",
+  "sha256": "6310afc28d9c600d9ead14f82a75fadaec78ff145392c31a1b1647bb56fd1f64",
+  "notes": "首次发布。"
+}

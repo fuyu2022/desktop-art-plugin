@@ -37,6 +37,24 @@ my-effect/
 
 `example.com` 是占位地址，发布前替换为自己的真实地址；没有更新服务的本地插件显式填 `null`。没有依赖时仍需填写 `"dependencies": {"plugins": {}, "libraries": {}}`。
 
+`updateUrl` 指向版本更新清单，不是 GitHub 的 `tree` 网页。清单必须是 HTTPS JSON，格式如下：
+
+```json
+{
+  "updateManifestVersion": 1,
+  "id": "my-effect",
+  "version": "1.2.0",
+  "downloadUrl": "https://github.com/example/my-effect/releases/download/v1.2.0/my-effect-1.2.0.zip",
+  "releaseUrl": "https://github.com/example/my-effect/releases/tag/v1.2.0",
+  "sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+  "notes": "修复桌面布局变化时的绘制问题。"
+}
+```
+
+`id` 必须与本地插件一致，`version` 是最新版本号，`downloadUrl` 是最新 Release 包的 HTTPS 地址。`releaseUrl`、`sha256` 和 `notes` 可选。宿主插件管理器的“检查更新”会读取并校验清单，显示最新版本和包地址；它不会因为检查更新而自动替换本地文件。
+
+清单最多 64 KiB，请求超时为 10 秒。自建服务需允许管理页面跨域读取，例如返回 `Access-Control-Allow-Origin: *`。GitHub Raw 地址可直接使用。
+
 | 字段 | 必填 | 类型与规则 |
 | --- | --- | --- |
 | `manifestVersion` | 是 | 整数，当前为 `1` |
@@ -128,7 +146,7 @@ export function dispose() {
 
 ## 更新地址与兼容
 
-`updateUrl` 是插件维护信息，当前版本只记录、校验和提供给 SDK／管理查询；不会后台访问地址，也没有自动下载、覆盖安装或更新按钮。未来更新协议需要单独版本化，不能依靠修改这个字段执行代码。
+`updateUrl` 是插件维护信息和远程更新清单地址。插件管理器会在用户主动点击“检查更新”时访问它，比较远程 `version` 与本地 SemVer，并显示 `downloadUrl`；不会后台自动访问，也不会自动下载、覆盖安装或执行远程代码。更新清单协议由 `updateManifestVersion` 单独版本化。
 
 没有 `manifestVersion` 的旧配置，以及只有 `main.js` 的旧插件，仍按兼容模式运行，默认入口 `main.js`，默认背景层。它们在查询中标记 `legacy: true`，不认定为符合本规范；不猜测作者和版本，也不改写用户文件。升级时补齐完整 `plugin.json`，保留文件夹 ID 与原有 `surface`，即可继续使用现有启用状态和 SDK 设置。
 

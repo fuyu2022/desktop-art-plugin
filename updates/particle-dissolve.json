@@ -1,0 +1,9 @@
+{
+  "updateManifestVersion": 1,
+  "id": "particle-dissolve",
+  "version": "1.0.0",
+  "downloadUrl": "https://github.com/fuyu2022/desktop-art-plugin/releases/download/particle-dissolve-v1.0.0/particle-dissolve-1.0.0.zip",
+  "releaseUrl": "https://github.com/fuyu2022/desktop-art-plugin/releases/tag/particle-dissolve-v1.0.0",
+  "sha256": "26766bc7f6c2744da31b19cda1fbe9220456a1c6ea92f9eb05acd11aa1038dc3",
+  "notes": "首次发布。"
+}

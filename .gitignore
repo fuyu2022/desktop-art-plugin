@@ -2,6 +2,9 @@
 /*
 !/.gitignore
 !/README.md
+!/updates/
+/updates/*
+!/updates/*.json
 
 !/plugins/
 /plugins/*
@@ -44,6 +47,7 @@
 !/sdk/
 /sdk/*
 !/sdk/plugin.schema.json
+!/sdk/plugin-update.schema.json
 !/sdk/sdk.d.ts
 
 # Local previews, tests, builds and editor files stay in the workspace.

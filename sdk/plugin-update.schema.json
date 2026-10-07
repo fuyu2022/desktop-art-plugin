@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Desktop Art plugin update manifest v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["updateManifestVersion", "id", "version", "downloadUrl"],
+  "properties": {
+    "updateManifestVersion": {"const": 1},
+    "id": {"type": "string", "minLength": 1, "maxLength": 64, "pattern": "^[A-Za-z0-9_-]+$"},
+    "version": {"$ref": "#/$defs/version"},
+    "downloadUrl": {"$ref": "#/$defs/httpsUrl"},
+    "releaseUrl": {"$ref": "#/$defs/httpsUrl"},
+    "sha256": {"type": "string", "pattern": "^[0-9A-Fa-f]{64}$"},
+    "notes": {"type": "string", "maxLength": 4096}
+  },
+  "$defs": {
+    "httpsUrl": {"type": "string", "maxLength": 2048, "format": "uri", "pattern": "^[Hh][Tt][Tt][Pp][Ss]://[^/@\\s]+(?:[/?#]|$)"},
+    "version": {"type": "string", "maxLength": 128, "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-(?:0|[1-9][0-9]*|[0-9A-Za-z-]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9A-Za-z-]*[A-Za-z-][0-9A-Za-z-]*))*)?(?:\\+[0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*)?$"}
+  }
+}
